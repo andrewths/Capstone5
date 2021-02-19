@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<meta charset="ISO-8859-1">
+<title>Employee Home Page</title>
+
+<link rel = "stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
+</head>
+<body>
+
+<div align="center">	
+	<div sec:authorize="isAuthenticated()">
+		Welcome <b><span sec:authentication="name">Username</span></b>
+		&nbsp;
+		<i><span sec:authentication="principal.authorities">Roles</span></i>
+	</div>
+		
+	<form th:action="@{/logout}" method="post">
+		<input type="submit" value="Logout" />
+	</form>
+	
+	<hr>
+	
+<div class="container text-center">
+
+		<div>
+			<h1> Employees Management</h1>
+			 <script>
+        var i;
+        for (i = 0; i < 2; i++) { 
+            document.write("<br>");
+        }
+    </script>
+       <div sec:authorize="hasAnyAuthority('admin')">
+			<div class="p-2">
+				<a  class="h2" th:href="@{/departments/new}" STYLE="color: red;"> Create Department</a>
+			</div>
+	   </div>
+	   <div sec:authorize="hasAnyAuthority('admin', 'hr')">
+			<div class="p-2">
+				<a  class="h2" th:href="@{/employees/new}" STYLE="color: brown;"> Create Employee Information</a>
+			</div>
+	   </div>
+  	   	
+	   <div class="p-2">
+		    <a  class="h2" th:href="@{/departments}" STYLE="color: blue;"  >  List of Departments</a>
+	   </div>
+					
+	   <div class="p-2">
+		    <a  class="h2" th:href="@{/employees}" STYLE="color: blue;"> List of Employees</a>
+	   </div>	
+			
+			
+			
+	   </div>
+	</div>
+  </div>
+  		
+</body>
+</html>
