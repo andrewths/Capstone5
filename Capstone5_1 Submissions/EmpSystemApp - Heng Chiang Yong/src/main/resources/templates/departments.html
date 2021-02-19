@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="ISO-8859-1">
+<link th:href="@{/css/sm.css}" rel="stylesheet" />
+ <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<title>Department List</title>
+</head>
+<body>
+	<div class="content">
+		<h1 style="text-align: center;">Department List</h1>
+	</div>
+	<div class="container content">
+		<table class="center styled-table">
+		<thead>
+			<tr>
+				<th> ID </th><th>Department  Name</th><th>Manager ID</th><th>Location ID</th><th>Operation</th>
+			</tr>
+		</thead>
+		<tbody class="content1">
+			<th:block th:each= "dep :${listDepartments}">
+				<tr> 
+				<td th:text="${dep.deptid}"></td>
+				<td th:text="${dep.deptname}"></td>
+				<td th:text="${dep.mgrid}"></td>
+				<td th:text="${dep.locid}"></td>
+			    <td>
+					<a style="color:black;" th:href="@{'/departments/edit/' + ${dep.deptid}}"> <span class="glyphicon glyphicon-pencil"></span> Edit </a>
+					<a style="color:black;"th:href="@{'/departments/delete/' + ${dep.deptid}}"><span class="glyphicon glyphicon-remove"></span> Delete </a> 
+				</td>
+   				</tr>
+			</th:block>
+		</tbody>
+		</table>
+	</div>
+<footer class='footer'>Employees Management Application  Copyright@2021</footer>	
+</body>
+</html>
